@@ -1,0 +1,26 @@
+class Complete
+{
+    public static int findMinimumInvertingFactor (int arr[], int n) 
+    {
+       for(int i=0;i<n;i++)
+       {
+         int p=arr[i],x,y=0;
+         while(p!=0)          // for reversing the each number in array.
+         {
+          x=p%10;          
+          y=(y*10)+x;       // y will be the reversed number.
+          p=p/10;          
+         }
+         arr[i]=y;                      
+       }
+       Arrays.sort(arr);
+       int ans = Integer.MAX_VALUE;
+       for (int i = 1; i < n; i++)
+       {
+           ans = Math.min(ans, Math.abs(arr[i] - arr[i - 1]));
+       }
+       return ans;
+    }
+    
+    
+}
