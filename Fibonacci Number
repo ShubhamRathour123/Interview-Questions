@@ -1,0 +1,29 @@
+class Solution 
+{
+    public int fib(int n)
+    {
+        int res;
+         int[] memo=new int[n+1];
+         for(int i=0;i<n ;i++)
+         {
+            memo[i]=-1;
+         }
+         if(n!=-1)
+         {
+            if(n==0)
+            {
+               return 0;
+            }
+            if(n==2 || n==1)
+            {
+              return 1;
+            }
+            else
+            {
+               res=fib(n-1) + fib(n-2);
+               memo[n]=res;
+             }
+         }
+         return memo[n];
+    }
+}
