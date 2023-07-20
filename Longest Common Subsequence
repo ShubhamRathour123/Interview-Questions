@@ -1,0 +1,42 @@
+class Solution 
+{
+    static int lcs(char[] arr1,char[] arr2,int n,int m,int i,int j,int[][] dp)
+    {
+          int ans=0;
+          if(i==n || j==m)
+          {
+              return 0;
+          }
+          if(dp[i][j]!=-1)
+          {
+              return dp[i][j];
+          }
+          if(arr1[i]==arr2[j])
+          {
+                ans=1+lcs(arr1,arr2,n,m,i+1,j+1,dp);
+          }
+          else
+          {
+              ans=Math.max(lcs(arr1,arr2,n,m,i+1,j,dp),lcs(arr1,arr2,n,m,i,j+1,dp));
+          }
+          return dp[i][j]=ans;
+    }
+    public int longestCommonSubsequence(String text1, String text2) 
+    {
+        int n=text1.length();
+        int m=text2.length();
+        int dp[][]=new int[n][m];
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                dp[i][j]=-1;
+            }
+        }
+        int i=0,j=0;
+        char[] arr1=text1.toCharArray();
+        char[] arr2=text2.toCharArray();
+        int ans=lcs(arr1,arr2,n,m,i,j,dp);
+        return ans;
+    }
+}
