@@ -1,0 +1,15 @@
+class Solution
+{
+    public static int findSurvivePerson(int n,int k)
+    {
+        if(1==n)return 0;
+        int ans=(findSurvivePerson(n-1,k)+k)%n;
+        return ans;
+    }
+   public int josephus(int n, int k)
+    {
+       int ans=findSurvivePerson(n,k);
+       ans+=1;
+       return ans;
+    }
+}
