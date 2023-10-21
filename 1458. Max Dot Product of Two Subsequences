@@ -1,0 +1,32 @@
+class Solution 
+{
+    public int maxDotProduct(int[] nums1, int[] nums2) 
+    {
+        int n=nums1.length;
+        int m=nums2.length;
+        int i=0,j=0;
+        int dp[][]=new int[n][m];
+        for(int k=0;k<n;k++)
+        {
+            for(int l=0;l<m;l++)
+            {
+                dp[k][l]=-1;
+            }
+        }
+        return subSequences(nums1,nums2,i,j,n,m,dp);
+    }
+    public static int subSequences(int[] nums1,int[] nums2,int i,int j,int n,int m,int[][] dp)
+    {
+        if(i>=n || j>=m)
+        {
+            return (int)-1e9; 
+        }
+        if(dp[i][j]!=-1)
+        {
+            return dp[i][j];
+        }
+        int take = Math.max(nums1[i]*nums2[j],nums1[i]*nums2[j]+subSequences(nums1,nums2,i+1,j+1,n,m,dp));
+        int notTake = Math.max(subSequences(nums1,nums2,i,j+1,n,m,dp),subSequences(nums1,nums2,i+1,j,n,m,dp));
+        return dp[i][j]=Math.max(take,notTake);
+    }
+}
