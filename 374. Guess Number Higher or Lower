@@ -1,0 +1,29 @@
+public class Solution extends GuessGame 
+{
+    public int guessNumber(int n) 
+    {
+        int ans=0;
+        int lower=1;
+        int higher=n;
+        int mid;
+        while(higher>=lower)
+        {
+            mid=lower+(higher-lower)/2;
+            int guessing=guess(mid);
+            if(guessing==-1)
+            {
+                higher=mid-1;
+            }
+            else if(guessing==1)
+            {
+                lower=mid+1;
+            }
+            else if(guessing==0)
+            {
+                ans=mid;
+                return ans;
+            }
+        }
+        return ans;
+    }
+}
