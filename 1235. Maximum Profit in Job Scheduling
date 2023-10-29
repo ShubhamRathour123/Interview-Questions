@@ -1,0 +1,50 @@
+class Solution 
+{
+    public int binarySearch(int lo, int hi, List<int[]> v, int currEnd) {
+        int ans = -1;
+        while (lo <= hi) 
+        {
+            int mid = lo + (hi - lo) / 2;
+
+            if (v.get(mid)[0] >= currEnd) 
+            {
+                ans = mid;
+                hi = mid - 1;
+            } else {
+                lo = mid + 1;
+            }
+        }
+        return ans;
+    }
+
+    public int rec(int i, List<int[]> v, int[] dp) 
+    {
+        if (i == v.size()) {
+
+            return 0;
+        }
+        if (dp[i] != -1)
+            return dp[i];
+        int skip = rec(i + 1, v, dp);
+        int take = v.get(i)[2];
+        int currEnd = v.get(i)[1];
+        int j = binarySearch(i + 1, v.size() - 1, v, currEnd);
+        if (j != -1)
+            take += rec(j, v, dp);
+        dp[i] = Math.max(skip, take);
+        return dp[i];
+    }
+    public int jobScheduling(int[] startTime, int[] endTime, int[] profit) 
+    {
+        List<int[]> v = new ArrayList<>();
+        int n = startTime.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp, -1);
+        for (int i = 0; i < n; i++) 
+        {
+            v.add(new int[]{startTime[i], endTime[i], profit[i]});
+        }
+        v.sort((a, b) -> Integer.compare(a[0], b[0]));
+        return rec(0, v, dp);
+    }
+}
