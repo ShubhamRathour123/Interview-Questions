@@ -1,0 +1,19 @@
+
+class Solution 
+{
+    int sum=0;
+    public int sumOfLeftLeaves(TreeNode root) 
+    {
+        sum=0;
+        char dir='c';
+        rec(root,dir);
+        return sum;
+    }
+    public void rec(TreeNode root,char dir)
+    {
+        if(root==null)return;
+        if(root.left==null && root.right==null && dir=='l')sum+=root.val;
+        rec(root.left,'l');
+        rec(root.right,'r');
+    }
+}
