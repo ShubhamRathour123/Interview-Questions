@@ -1,0 +1,17 @@
+class Solution 
+{
+    public boolean isSameTree(TreeNode p, TreeNode q) 
+    {
+        return rec(p,q);
+    }
+    boolean rec(TreeNode p, TreeNode q)
+    {
+        if(p==null && q==null)return true;
+        if(p==null || q==null)return false;
+        if(p.val!=q.val)return false;
+        boolean check1=rec(p.left,q.left);
+        boolean check2=rec(p.right,q.right);
+        if(check1==true && check2==true)return true;
+        else return false;
+    }
+}
