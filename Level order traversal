@@ -1,0 +1,27 @@
+
+class Solution
+{
+    static ArrayList <Integer> levelOrder(Node node) 
+    {
+        ArrayList<Integer> ans=new ArrayList<>();
+        Queue<Node> q=new LinkedList<Node>();
+        q.add(node);
+        while(!q.isEmpty() || q.size()>0)
+        {
+            Node curr=q.remove();
+            ans.add(curr.data);
+            if(curr.left!=null)
+            {
+                q.add(curr.left);
+            }
+            if(curr.right!=null)
+            {
+                q.add(curr.right);
+            }
+        }
+        return ans;
+    }
+}
+
+
+
