@@ -1,0 +1,18 @@
+class Solution 
+{
+    int moves=0;
+    int rec(TreeNode root)
+    {
+        if(root==null)return 0;
+        int l=rec(root.left);
+        int r=rec(root.right);
+        moves+=Math.abs(l)+Math.abs(r);
+        return l+r+(root.val)-1;
+    }
+    public int distributeCoins(TreeNode root) 
+    {
+          moves=0;
+          rec(root);
+          return moves;  
+    }
+}
