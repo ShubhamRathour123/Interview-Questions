@@ -1,0 +1,20 @@
+class Solution 
+{
+    public List<Integer> inorderTraversal(TreeNode root) 
+    {
+        List<Integer> ans=new ArrayList<Integer>();
+        rec(root,ans);
+        return ans;
+    }
+    void rec(TreeNode root,List<Integer> ans)
+    {
+        if(root==null)
+        {
+            return;
+        }
+        rec(root.left,ans);
+        int x=root.val;
+        ans.add(x);
+        rec(root.right,ans);
+    }
+}
