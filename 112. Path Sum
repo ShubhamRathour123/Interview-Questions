@@ -1,0 +1,30 @@
+class Solution 
+{
+    boolean findPath(TreeNode root,int target,int currSum)
+    {
+        if(root==null)
+        {
+            return false;
+        }
+        currSum+=root.val;
+        if(root.left==null && root.right==null)
+        {
+            if(target==currSum)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        boolean l=findPath(root.left,target,currSum);
+        boolean r=findPath(root.right,target,currSum);
+        return l || r;
+    }
+    public boolean hasPathSum(TreeNode root, int targetSum) 
+    {
+        int currSum=0;
+        return findPath(root,targetSum,currSum);
+    }
+}
