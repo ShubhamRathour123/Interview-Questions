@@ -1,0 +1,42 @@
+public class Solution 
+{
+    private int[][] dp;
+    public int longestIncreasingPath(int[][] matrix) 
+    {
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int mx = 0;
+        dp = new int[n][m];
+        for (int i = 0; i < n; i++) 
+        {
+            Arrays.fill(dp[i], -1);
+        }
+        for (int i = 0; i < n; i++) 
+        {
+            for (int j = 0; j < m; j++) 
+            {
+                int temp = rec(i, j, matrix, n, m, -1);
+                mx = Math.max(mx, temp);
+            }
+        }
+        return mx;
+    }
+    private int rec(int i, int j, int[][] matrix, int n, int m, int prev) 
+    {
+        if (i < 0 || j < 0 || i == n || j == m || matrix[i][j] <= prev)
+        {
+            return 0;
+        }
+        if (dp[i][j] != -1)
+        {
+            return dp[i][j];
+        }
+        int up = rec(i - 1, j, matrix, n, m, matrix[i][j]);
+        int down = rec(i + 1, j, matrix, n, m, matrix[i][j]);
+        int left = rec(i, j - 1, matrix, n, m, matrix[i][j]);
+        int right = rec(i, j + 1, matrix, n, m, matrix[i][j]);
+        int ans = Math.max(Math.max(left, right), Math.max(up, down)) + 1;
+        dp[i][j] = ans;
+        return dp[i][j];
+    }
+}
