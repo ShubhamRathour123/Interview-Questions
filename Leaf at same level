@@ -1,0 +1,34 @@
+class Solution {
+    boolean check(Node root) {
+        if (root == null)
+            return true; 
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        int level = 0;
+        int leafLevel = -1;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            level++;
+
+            for (int i = 0; i < size; i++) {
+                Node current = queue.poll();
+
+                if (current.left == null && current.right == null) {
+                    if (leafLevel == -1) {
+                        leafLevel = level;
+                    } else if (leafLevel != level) {
+                        return false;
+                    }
+                }
+
+                if (current.left != null)
+                    queue.add(current.left);
+
+                if (current.right != null)
+                    queue.add(current.right);
+            }
+        }
+
+        return true;
+    }
+}
